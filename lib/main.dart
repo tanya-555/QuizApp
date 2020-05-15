@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './questions_answers_list.dart';
 
 void main() => runApp(QuizApp());
 
@@ -10,8 +11,43 @@ class QuizApp extends StatefulWidget {
 }
 
 class _QuizAppState extends State<QuizApp> {
+  List<Map<String, Object>> _quizList = QuizList().getQuizList();
+
+  var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+    setState(() {
+      _questionIndex += 1;
+    });
+    if (_questionIndex >= _quizList.length) {
+      print("All questions are answered!");
+    } else {
+      print("There are more questions to answer");
+    }
+  }
+
+  Widget _doProcessing() {
+  }
+
   @override
   Widget build(BuildContext context) {
-    return null;
+    // TODO: implement build
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Quiz App'),
+        ),
+        body: _doProcessing(),
+      ),
+    );
   }
 }
