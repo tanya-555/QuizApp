@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizapp/quiz.dart';
+import 'package:quizapp/result.dart';
 import './questions_answers_list.dart';
 
 void main() => runApp(QuizApp());
@@ -36,6 +38,15 @@ class _QuizAppState extends State<QuizApp> {
   }
 
   Widget _doProcessing() {
+    if (_questionIndex < _quizList.length) {
+      return Quiz(
+        questionIndex: _questionIndex,
+        questions: _quizList,
+        answerQuestion: _answerQuestion,
+      );
+    } else {
+      return Result(_totalScore, _resetQuiz);
+    }
   }
 
   @override
